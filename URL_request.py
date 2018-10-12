@@ -7,13 +7,13 @@ from requests.exceptions import ConnectionError
 try:
 	
 	response = requests.get("https://www.yahoo.com")
-	c360 = response.status_code
+	test = response.status_code
 
-	if (c360 == 200):
+	if (test == 200):
 		print("Success")
 
 	else:
-		print ("Fail", resonse.reason)
+		print ("Fail\n",test, response.reason)
 
 except ConnectionError as e:
         print ('BAD URL', e)
