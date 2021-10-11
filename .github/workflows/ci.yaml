@@ -12,17 +12,15 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v2
 
-      - name: set variable output
-        run: | 
-          export PROJECT_ID='DEVOPS'
-          echo "::set-env name=PROJECT_ID::$PROJECT_ID"
+      - name: Load .env file
+        uses: xom9ikk/dotenv@v1.0.2
+        with:
+          path: .github/workflows/.env.dev
+          mode: development
         if: github.ref == 'refs/heads/master'
 
       - name: set variable output
-        run: | 
-          export PROJECT_ID='DEVELOPMENT'
-          echo "::set-env name=PROJECT_ID::$PROJECT_ID"
-        if: github.ref == 'refs/heads/develop'
+        run: |
+          echo "Variable 1: ${{ env.project_id }}"
 
-      - name: print output
-        run: echo $PROJECT_ID
+
