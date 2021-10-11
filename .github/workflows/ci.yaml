@@ -1,0 +1,21 @@
+name: '${{ github.ref}} test varaible export'
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  variable_export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+
+      - name: set variable output
+        run: | 
+          export PROJECT_ID="devops"
+        if: ${{ github.ref == ref/heads/master }}
+
+      - name: print output
+        run: echo $PROJECT_ID
