@@ -1,4 +1,4 @@
-name: '${{ github.ref}} test varaible export'
+name: 'test varaible export'
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
       - name: set variable output
         run: | 
           export PROJECT_ID="devops"
-        if: ${{ github.ref == ref/heads/master }}
+        if: github.ref == 'refs/heads/develop'
 
       - name: print output
         run: echo $PROJECT_ID
