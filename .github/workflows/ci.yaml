@@ -16,11 +16,18 @@ jobs:
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
-          mode: dev
+          mode: stage
         if: github.ref == 'refs/heads/master'
+
+      - name: Load .env file
+        uses: xom9ikk/dotenv@v1.0.2
+        with:
+          path: .github/workflows/
+          mode: development
+        if: github.ref == 'refs/heads/dev' 
 
       - name: set variable output
         run: |
-          echo "Variable 1: ${{ env.project_id }}"
+          echo "${{ env.project_id }}"
 
 
