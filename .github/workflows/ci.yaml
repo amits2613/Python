@@ -1,4 +1,3 @@
-name: '${{ github.ref }} varaible export'
 
 on:
   push:
