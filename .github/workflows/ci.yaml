@@ -1,3 +1,7 @@
+env:
+  BRANCH_NAME: ${{ github.ref }}
+
+name: ${{ env.BRANCH_NAME }} workflow
 
 on:
   push:
