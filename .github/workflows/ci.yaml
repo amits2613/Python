@@ -13,18 +13,16 @@ jobs:
         uses: actions/checkout@v2
 
       - name: set variable output
-        id: vars
         run: | 
           export PROJECT_ID='DEVOPS'
-          echo "::set-output name=PROJECT_ID::$PROJECT_ID"
+          echo "::set-env name=PROJECT_ID::$PROJECT_ID"
         if: github.ref == 'refs/heads/master'
 
       - name: set variable output
-        id: vars
         run: | 
           export PROJECT_ID='DEVELOPMENT'
-          echo "::set-output name=PROJECT_ID::$PROJECT_ID"
+          echo "::set-env name=PROJECT_ID::$PROJECT_ID"
         if: github.ref == 'refs/heads/develop'
 
       - name: print output
-        run: ${{ steps.vars.outputs.PROJECT_ID }}
+        run: echo $PROJECT_ID
