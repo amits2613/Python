@@ -1,7 +1,4 @@
-env:
-  BRANCH_NAME: ${{ github.ref }}
-
-name: ${{ env.BRANCH_NAME }} workflow
+name: workflow
 
 on:
   push:
@@ -10,27 +7,34 @@ on:
 
 jobs:
   variable_export:
+    strategy:
+        matrix:
+          project_id: [devlopment, staging, prod]
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
 
-      - name: Load .env file
-        uses: xom9ikk/dotenv@v1.0.2
-        with:
-          path: .github/workflows/
-          mode: stage
-        if: github.ref == 'refs/heads/master'
+      # - name: Load .env file
+      #   uses: xom9ikk/dotenv@v1.0.2
+      #   with:
+      #     path: .github/workflows/
+      #     mode: stage
+      #   if: github.ref == 'refs/heads/master'
 
-      - name: Load .env file
-        uses: xom9ikk/dotenv@v1.0.2
-        with:
-          path: .github/workflows/
-          mode: development
-        if: github.ref == 'refs/heads/dev' 
+      # - name: Load .env file
+      #   uses: xom9ikk/dotenv@v1.0.2
+      #   with:
+      #     path: .github/workflows/
+      #     mode: development
+      #   if: github.ref == 'refs/heads/dev' 
 
       - name: set variable output
         run: |
-          echo "${{ env.project_id }}"
+          echo "${{ matrix.project_id }}"
+
+      # - name: set variable output
+      #   run: |
+      #     echo "${{ env.project_id }}"
 
 
