@@ -32,9 +32,11 @@ jobs:
       - name: set variable output
         run: |
           echo "${{ matrix.project_id }}"
+        with:
+          project_id: ${{ matrix.project_id }}
 
-      # - name: set variable output
-      #   run: |
-      #     echo "${{ env.project_id }}"
+      - name: set variable output
+        run: |
+          echo "hello world"
 
 
