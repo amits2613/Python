@@ -28,6 +28,6 @@ jobs:
 
       - name: set variable output
         run: |
-          echo ${{ env.project_id }}
+          echo ${{ env }}
 
 
