@@ -6,7 +6,16 @@ on:
       - "master"
 
 jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - id: set-matrix
+      run: echo "::set-output name=matrix::{\"include\":[{\"project_is\":\"developent\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+
   variable_export:
+    needs: job1
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
@@ -34,9 +43,7 @@ jobs:
 
       - name: set variable output
         run: |
-          for id in ${{ env.project_id }}
-          do 
-            echo $id
-          done
+            echo ${{ env.environment }}
+            echo ${{ env.project_id }}
 
 
