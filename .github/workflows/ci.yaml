@@ -53,4 +53,4 @@ jobs:
       - name: print 
         run: | 
           echo "${{ github.run_id }}"
-          echo "${{ project_id }}:${{ github.run_id }}"
+          echo "${{ matrix.project_id }}:${{ github.run_id }}"
