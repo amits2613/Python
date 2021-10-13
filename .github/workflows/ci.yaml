@@ -6,16 +6,7 @@ on:
       - "master"
 
 jobs:
-  job1:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-    - id: set-matrix
-      run: echo "::set-output name=matrix::{\"include\":[{\"project_is\":\"developent\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
-
-  variable_export:
-    needs: job1
+  nonprod_variable_export:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository
@@ -28,22 +19,38 @@ jobs:
       #     mode: stage
       #   if: github.ref == 'refs/heads/master'
 
-      # - name: Load .env file
-      #   uses: xom9ikk/dotenv@v1.0.2
-      #   with:
-      #     path: .github/workflows/
-      #     mode: development
-      #   if: github.ref == 'refs/heads/dev' 
-
       - name: Load .env file
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
-          mode: prod
+          mode: development
+        if: github.ref == 'refs/heads/dev' 
+
+      # - name: Load .env file
+      #   uses: xom9ikk/dotenv@v1.0.2
+      #   with:
+      #     path: .github/workflows/
+      #     mode: prod
 
       - name: set variable output
         run: |
             echo ${{ env.environment }}
             echo ${{ env.project_id }}
 
+  prod_variable_export:
+    strategy:
+      matrix:
+        project_id: [production1, production2, production3]
+    runs-on: ubuntu-latest
+    steps:
+      # - name: Load .env file
+      #   uses: xom9ikk/dotenv@v1.0.2
+      #   with:
+      #     path: .github/workflows/
+      #     mode: prod
+      #   if: github.ref == 'refs/heads/master'
 
+      - name: print 
+        run: | 
+          echo "${{ github.run_id }}"
+          echo "${{ project_id }}:${{ github.run_id }}"
