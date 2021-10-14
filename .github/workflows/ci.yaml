@@ -36,11 +36,11 @@ jobs:
         run: |
             echo "${{ github.run_id }}"
       
-      - name: repo checkout
-        uses: actions/checkout@v2
-        with:
-          repository: amits2613/Amit
-          ref: master
+      # - name: repo checkout
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: amits2613/Amit
+      #     ref: master
 
       # - name: autheticate github cli 
       #   env:
@@ -53,8 +53,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
+          git clone https://github.com/amits2613/Amit.git 
           ls -lha .
-          gh workflow run reusable.yaml -f project_id=${{ env.project_id }}
+          gh workflow run Amit/reusable.yaml -f project_id=${{ env.project_id }}
   # prod_variable_export:
   #   strategy:
   #     matrix:
