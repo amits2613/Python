@@ -54,7 +54,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           ls -lha .
-          gh workflow run .github/workflows/reusable.yaml -f project_id=${{ env.project_id }}
+          gh workflow run reusable.yaml -f project_id=${{ env.project_id }}
   # prod_variable_export:
   #   strategy:
   #     matrix:
