@@ -42,13 +42,16 @@ jobs:
           repository: amits2613/Amit
           ref: master
 
-      - name: autheticate github cli 
-        run: |
-          export GITHUB_TOKEN=${{ secrets.ACCESS_TOKEN}}
-          gh auth login ${{ secrets.ACCESS_TOKEN}}
-          gh auth status
+      # - name: autheticate github cli 
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      #   run: |
+      #     gh auth login
+      #     gh auth status
 
       - name: manually trigger workflow
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
           la -lha 
           gh workflow run .github/workflows/reusable.yaml -f project_id=${{ env.project_id }}
