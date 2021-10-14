@@ -44,6 +44,7 @@ jobs:
 
       - name: manually trigger workflow
         run: |
+          gh auth login --with-token < ${{ secrets.ACCESS_TOKEN}}
           gh workflow run .github/workflows/reusable.yaml -f project_id=${{ env.project_id }}
   # prod_variable_export:
   #   strategy:
