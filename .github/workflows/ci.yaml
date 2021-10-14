@@ -36,15 +36,18 @@ jobs:
         run: |
             echo "${{ github.run_id }}"
       
-      - name: Kubernetes-Config repo checkout
+      - name: repo checkout
         uses: actions/checkout@v2
         with:
           repository: amits2613/Amit
           ref: master
 
+      - name: autheticate github cli 
+        run: gh auth login --with-token < ${{ secrets.ACCESS_TOKEN}}
+
       - name: manually trigger workflow
         run: |
-          gh auth login --with-token < ${{ secrets.ACCESS_TOKEN}}
+          la -lha 
           gh workflow run .github/workflows/reusable.yaml -f project_id=${{ env.project_id }}
   # prod_variable_export:
   #   strategy:
