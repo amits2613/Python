@@ -53,9 +53,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         run: |
-          git clone https://github.com/amits2613/Amit.git 
+          curl https://raw.githubusercontent.com/amits2613/Amit/master/reusable.yaml --output reusable.yaml
           ls -lha .
-          gh workflow run Amit/reusable.yaml -f project_id=${{ env.project_id }}
+          gh workflow run reusable.yaml -f project_id=${{ env.project_id }}
   # prod_variable_export:
   #   strategy:
   #     matrix:
