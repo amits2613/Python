@@ -12,19 +12,19 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v2
 
-      # - name: Load .env file
-      #   uses: xom9ikk/dotenv@v1.0.2
-      #   with:
-      #     path: .github/workflows/
-      #     mode: stage
-      #   if: github.ref == 'refs/heads/master'
-
       - name: Load .env file
         uses: xom9ikk/dotenv@v1.0.2
         with:
           path: .github/workflows/
-          mode: development
-        if: github.ref == 'refs/heads/dev' 
+          mode: stage
+        if: github.ref == 'refs/heads/master'
+
+      # - name: Load .env file
+      #   uses: xom9ikk/dotenv@v1.0.2
+      #   with:
+      #     path: .github/workflows/
+      #     mode: development
+      #   if: github.ref == 'refs/heads/dev' 
 
       # - name: Load .env file
       #   uses: xom9ikk/dotenv@v1.0.2
@@ -35,18 +35,27 @@ jobs:
       - name: set variable output
         run: |
             echo "${{ github.run_id }}"
-
-  prod_variable_export:
-    strategy:
-      matrix:
-        project_id: [production1, production2, production3]
-    runs-on: ubuntu-latest
-    needs: nonprod_variable_export
-    steps:
-      - name: checkout repository
+      
+      - name: Kubernetes-Config repo checkout
         uses: actions/checkout@v2
+        with:
+          repository: amits2613/Amit
+          ref: master
 
-      - name: print 
-        run: | 
-          echo "${{ github.run_id }}"
-          echo "${{ matrix.project_id }}:${{ github.run_id }}"
+      - name: manually trigger workflow
+        run: |
+          gh workflow run .github/workflows/reusable.yaml -f project_id=${{ env.project_id }}
+  # prod_variable_export:
+  #   strategy:
+  #     matrix:
+  #       project_id: [production1, production2, production3]
+  #   runs-on: ubuntu-latest
+  #   needs: nonprod_variable_export
+  #   steps:
+  #     - name: checkout repository
+  #       uses: actions/checkout@v2
+
+  #     - name: print 
+  #       run: | 
+  #         echo "${{ github.run_id }}"
+  #         echo "${{ matrix.project_id }}:${{ github.run_id }}"
