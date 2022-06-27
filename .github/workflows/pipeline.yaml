@@ -1,0 +1,37 @@
+name: '[DEV] Monolith application deploy'
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  application_deploy:
+    name: Monolith application deployment
+    runs-on: ubuntu-latest
+    steps:
+      - name: set outputs
+        id: vars
+        run: |
+          echo "##[set-output name=BRANCH]$(echo ${GITHUB_REF#refs/heads/})"
+
+      - shell: bash
+        run: echo "$SSH_KEY" > private_key
+        env:
+          SSH_KEY: ${{ secrets.DEV_PRIVATE_SSH_KEY }}
+
+      - name: Executing commands on dev server 
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_SERVER_HOSTNAME }}
+          username: ${{ secrets.DEV_SERVER_USERNAME }}
+          key: ${{ secrets.DEV_PRIVATE_SSH_KEY }}
+          command_timeout: 60m
+          script: |
+            sudo -s
+            whoami
+            source /opt/script.sh ${{ steps.vars.outputs.BRANCH }}
+
+
+
+
