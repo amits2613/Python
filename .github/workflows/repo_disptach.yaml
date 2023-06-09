@@ -7,7 +7,6 @@ jobs:
   repo_dispatch_trigger:
     runs-on: ubuntu-latest
     steps:
-      
       - name: Set branch name
         id: vars
         run: |
@@ -15,8 +14,4 @@ jobs:
           echo "BRANCH=$branch" >> $GITHUB_OUTPUT
 
       - name: get branch name
-        run: |
-          # echo $branch
-          echo ${{ steps.vars.outputs.BRANCH }}
-        env:
-          branch: ${{ steps.vars.outputs.BRANCH }}
+        run: echo ${{ steps.vars.outputs.BRANCH }}
