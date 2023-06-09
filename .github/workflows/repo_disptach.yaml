@@ -12,10 +12,11 @@ jobs:
         id: vars
         run: |
           echo "${{ toJson(github.event.client_payload) }}" > output.json
-          echo "BRANCH= $(jq '.branch_name' output.json)" >> $GITHUB_ENV
+          cat output.json
+          #echo "BRANCH= $(jq '.branch_name' output.json)" >> $GITHUB_ENV
 
-      - name: get branch name
-        run: |
-          echo $branch
-        env:
-          branch: ${{ steps.vars.outputs.BRANCH }}
+      # - name: get branch name
+      #   run: |
+      #     echo $branch
+      #   env:
+      #     branch: ${{ steps.vars.outputs.BRANCH }}
