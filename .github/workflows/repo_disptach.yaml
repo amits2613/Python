@@ -1,0 +1,14 @@
+name: server_restart
+on:
+  repository_dispatch:
+    types: [trigger-repo]
+
+jobs:
+  repo_dispatch_trigger:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Print Branch name
+        run: |
+          echo "branch_name: ${{ github.event.client_payload.branch_name }}"
+          echo $branch_name
