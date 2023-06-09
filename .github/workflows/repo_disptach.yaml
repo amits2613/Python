@@ -6,9 +6,16 @@ on:
 jobs:
   repo_dispatch_trigger:
     runs-on: ubuntu-latest
+    id: vars
     steps:
       
-      - name: Print Branch name
+      - name: Set branch name
         run: |
           echo "branch_name: ${{ github.event.client_payload.branch_name }}"
-          echo $branch_name
+          echo "BRANCH=$branch_name" >> $GITHUB_OUTPUT
+
+      - name: get branch name
+        run: |
+          echo $branch
+        with:
+          branch: ${{ steps.vars.outputs.BRANCH }}
