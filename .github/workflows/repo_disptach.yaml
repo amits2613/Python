@@ -10,10 +10,11 @@ jobs:
       - name: Set branch name
         id: vars
         run: |
-          echo result=${{ toJson(github.event.client_payload.branch_name) }}
-          branch=$result
-          echo $branch
-          # $echo "BRANCH=$branch" >> $GITHUB_OUTPUT
+          result=${{ toJson(github.event.client_payload.branch_name) }}
+          echo $result
+          # branch=$result
+          # echo $branch
+          # # $echo "BRANCH=$branch" >> $GITHUB_OUTPUT
 
       # - name: get branch name
       #   run: echo ${{ steps.vars.outputs.BRANCH }}
