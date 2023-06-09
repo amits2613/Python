@@ -3,7 +3,7 @@ name: '[DEV] Monolith application deploy'
 on:
   push:
     branches:
-      - 'master'
+      - 'hel'
 
 jobs:
   application_deploy:
