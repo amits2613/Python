@@ -13,7 +13,7 @@ jobs:
           echo result=${{ toJson(github.event.client_payload.branch_name) }}
           branch=$result
           echo $branch
-          $echo "BRANCH=$branch" >> $GITHUB_OUTPUT
+          # $echo "BRANCH=$branch" >> $GITHUB_OUTPUT
 
       # - name: get branch name
       #   run: echo ${{ steps.vars.outputs.BRANCH }}
