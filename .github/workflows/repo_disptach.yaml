@@ -11,8 +11,8 @@ jobs:
       - name: Set branch name
         id: vars
         run: |
-          echo "BRANCH=${{ toJson(github.event.client_payload) }}.branch_name" >> $GITHUB_OUTPUT
-          #echo BRANCH=$payload['branch_name'] >> $GITHUB_OUTPUT
+          echo "payload=${{ toJson(github.event.client_payload) }}"
+          echo BRANCH=$payload['branch_name'] >> $GITHUB_OUTPUT
 
       - name: get branch name
         run: |
