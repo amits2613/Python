@@ -5,7 +5,7 @@ on:
     branches: 
     - 'dev'
     paths:
-      - './overlays/prod/**/*'
+      - 'overlays/prod/**/*'
 
 jobs:
   sync-image-tag:
