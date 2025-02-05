@@ -2,7 +2,8 @@ name: 'testing clone commit'
 
 on:
   push:
-    branches: 'dev'
+    branches: 
+    - 'dev'
     paths:
       - './overlays/prod/**/*'
 
