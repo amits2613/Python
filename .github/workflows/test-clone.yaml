@@ -39,4 +39,4 @@ jobs:
         with:
           branch: master
           commit_message: 'Automated image tag update'
-          file_pattern: *.values.yaml
+          file_pattern: '*.values.yaml'
