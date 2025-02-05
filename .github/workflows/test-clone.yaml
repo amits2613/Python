@@ -15,11 +15,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install yq
-        run: |
-          sudo add-apt-repository ppa:rmescandon/yq
-          sudo apt update
-          sudo apt install yq -y
+      # - name: Install yq
+      #   run: |
+      #     sudo add-apt-repository ppa:rmescandon/yq
+      #     sudo apt update
+      #     sudo apt install yq -y
 
       - name: Extract image tag 
         id: extract_tag
