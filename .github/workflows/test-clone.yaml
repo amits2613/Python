@@ -1,4 +1,4 @@
-name: testing clone commit
+name: 'testing clone commit'
 
 on:
   push:
